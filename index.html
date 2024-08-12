@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advyka</title>
+    <link rel="icon" type="image/x-icon" href="logo1.png">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .loadback{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0); /* Semi-transparent black background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9995; /* Ensure loader appears above other content */
+}
+.loader {
+    --uib-size: 200px;
+    --uib-color: rgb(255, 255, 255);
+    --uib-speed: 1.75s;
+    position: fixed;
+    top: 40%;
+    left: 43%;
+    height: var(--uib-size);
+    width: var(--uib-size);
+    /* margin-top: 300px;
+    margin-left: 650px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Ensure loader appears above other content */
+    animation: rotate calc(var(--uib-speed) * 4) linear infinite;
+}
+@media (max-width: 500px){
+    .loader {
+    --uib-size: 150px;
+    top: 40%;
+      left: 30%;
+    /* margin-top: 400px;
+    margin-left: 140px; */
+    }
+}
+        @keyframes rotate {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      
+        .particle {
+          position: absolute;
+          top: 0%;
+          left: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          width: 100%;
+      
+          &:nth-child(1) {
+            --uib-delay: 0;
+            transform: rotate(8deg);
+          }
+          &:nth-child(2) {
+            --uib-delay: -0.4;
+            transform: rotate(36deg);
+          }
+      
+          &:nth-child(3) {
+            --uib-delay: -0.9;
+            transform: rotate(72deg);
+          }
+          &:nth-child(4) {
+            --uib-delay: -0.5;
+            transform: rotate(90deg);
+          }
+          &:nth-child(5) {
+            --uib-delay: -0.3;
+            transform: rotate(144deg);
+          }
+          &:nth-child(6) {
+            --uib-delay: -0.2;
+            transform: rotate(180deg);
+          }
+          &:nth-child(7) {
+            --uib-delay: -0.6;
+            transform: rotate(216deg);
+          }
+          &:nth-child(8) {
+            --uib-delay: -0.7;
+            transform: rotate(252deg);
+          }
+          &:nth-child(9) {
+            --uib-delay: -0.1;
+            transform: rotate(300deg);
+          }
+          &:nth-child(10) {
+            --uib-delay: -0.8;
+            transform: rotate(324deg);
+          }
+          &:nth-child(11) {
+            --uib-delay: -1.2;
+            transform: rotate(335deg);
+          }
+          &:nth-child(12) {
+            --uib-delay: -0.5;
+            transform: rotate(290deg);
+          }
+          &:nth-child(13) {
+            --uib-delay: -0.2;
+            transform: rotate(240deg);
+          }
+        }
+      
+        .particle::before {
+          content: '';
+          position: absolute;
+          height: 17.5%;
+          width: 17.5%;
+          border-radius: 50%;
+          background-color: var(--uib-color);
+          flex-shrink: 0;
+          transition: background-color 0.3s ease;
+          --uib-d: calc(var(--uib-delay) * var(--uib-speed));
+          animation: orbit var(--uib-speed) linear var(--uib-d) infinite;
+        }
+      
+        @keyframes orbit {
+          0% {
+            transform: translate(calc(var(--uib-size) * 0.5)) scale(0.73684);
+            opacity: 0.65;
+          }
+          5% {
+            transform: translate(calc(var(--uib-size) * 0.4)) scale(0.684208);
+            opacity: 0.58;
+          }
+          10% {
+            transform: translate(calc(var(--uib-size) * 0.3)) scale(0.631576);
+            opacity: 0.51;
+          }
+          15% {
+            transform: translate(calc(var(--uib-size) * 0.2)) scale(0.578944);
+            opacity: 0.44;
+          }
+          20% {
+            transform: translate(calc(var(--uib-size) * 0.1)) scale(0.526312);
+            opacity: 0.37;
+          }
+          25% {
+            transform: translate(0%) scale(0.47368);
+            opacity: 0.3;
+          }
+          30% {
+            transform: translate(calc(var(--uib-size) * -0.1)) scale(0.526312);
+            opacity: 0.37;
+          }
+          35% {
+            transform: translate(calc(var(--uib-size) * -0.2)) scale(0.578944);
+            opacity: 0.44;
+          }
+          40% {
+            transform: translate(calc(var(--uib-size) * -0.3)) scale(0.631576);
+            opacity: 0.51;
+          }
+          45% {
+            transform: translate(calc(var(--uib-size) * -0.4)) scale(0.684208);
+            opacity: 0.58;
+          }
+          50% {
+            transform: translate(calc(var(--uib-size) * -0.5)) scale(0.73684);
+            opacity: 0.65;
+          }
+          55% {
+            transform: translate(calc(var(--uib-size) * -0.4)) scale(0.789472);
+            opacity: 0.72;
+          }
+          60% {
+            transform: translate(calc(var(--uib-size) * -0.3)) scale(0.842104);
+            opacity: 0.79;
+          }
+          65% {
+            transform: translate(calc(var(--uib-size) * -0.2)) scale(0.894736);
+            opacity: 0.86;
+          }
+          70% {
+            transform: translate(calc(var(--uib-size) * -0.1)) scale(0.947368);
+            opacity: 0.93;
+          }
+          75% {
+            transform: translate(0%) scale(1);
+            opacity: 1;
+          }
+          80% {
+            transform: translate(calc(var(--uib-size) * 0.1)) scale(0.947368);
+            opacity: 0.93;
+          }
+          85% {
+            transform: translate(calc(var(--uib-size) * 0.2)) scale(0.894736);
+            opacity: 0.86;
+          }
+          90% {
+            transform: translate(calc(var(--uib-size) * 0.3)) scale(0.842104);
+            opacity: 0.79;
+          }
+          95% {
+            transform: translate(calc(var(--uib-size) * 0.4)) scale(0.789472);
+            opacity: 0.72;
+          }
+          100% {
+            transform: translate(calc(var(--uib-size) * 0.5)) scale(0.73684);
+            opacity: 0.65;
+          }
+        }
+      </style>
+    <link rel="stylesheet" href="adv_style.css">
+</head>
+<body>
+    <div class="loadback">
+        <div class="loader">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+    </div>
+    
+<nav>
+    <link rel="stylesheet" href="nav.css">
+    <img src="logof.png" alt="G" id="logoi">
+    <ul class="sidebar">
+        <li><a href="#home" class="sidebar-link" data-text="HOME">HOME</a></li>
+        <li><a href="#proh" class="sidebar-link" data-text="PRO SHOW">PRO SHOW</a></li>
+        <li><a href="#event" class="sidebar-link" data-text="MAIN EVENTS">MAIN EVENTS</a></li>
+        <li><a href="#search-box" class="sidebar-link" data-text="SEARCH EVENTS">SEARCH EVENTS</a></li>
+        <li><a href="#footer-content" class="sidebar-link" data-text="CONTACT">CONTACT</a></li>
+    </ul>
+    <div onclick="sideslider()" id="nav-icon1">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+<div class="back" id="home">
+    <video autoplay muted plays-inline class="back_video2">
+        <source src="backvideoph.mp4" type="video/mp4">
+    </video>
+    <video autoplay muted plays-inline class="back_video1">
+        <source src="backvideo.mp4" type="video/mp4">
+    </video>
+</div>
+<section>
+    <div class="pro">
+        <center><h1 id="proh">PRO SHOW</h1></center>
+        <div>
+            <div id="loop1" >
+                <h1><b>PRO</b> <span>SHOW. </span></h1>
+                <h1><b>PRO</b> <span>SHOW. </span></h1>
+                <h1><b>PRO</b> <span>SHOW. </span></h1>
+            </div>
+            <div id="loop2" style="padding-top: 300px;">
+                <h1><b> PRO</b> <span>SHOW. </span></h1>
+                <h1><b> PRO</b> <span>SHOW. </span></h1>
+                <h1><b> PRO</b> <span>SHOW. </span></h1>
+            </div>
+            <div id="loop3" style="padding-top: 600px;">
+                <h1><b> PRO</b> <span>SHOW. </span></h1>
+                <h1><b> PRO</b> <span>SHOW. </span></h1>
+                <h1><b> PRO</b> <span>SHOW. </span></h1>
+            </div> 
+        </div>
+        <div id="slider">
+            <input class="card-slider" type="radio" name="slider" id="s1" checked>
+            <input class="card-slider" type="radio" name="slider" id="s2">
+            <input class="card-slider" type="radio" name="slider" id="s3" >
+            <input class="card-slider" type="radio" name="slider" id="s4">
+            <input class="card-slider"type="radio" name="slider" id="s5">
+            <label for="s1" id="slide1" class="card-slider" style="background-image:url(sooraj1.jpg); background-size: contain; background-repeat: no-repeat;"></label>
+            <label for="s2" id="slide2" class="card-slider" style="background-image:url(sooraj2.jpg); background-size: cover; background-repeat: no-repeat;"></label>
+            <label for="s3" id="slide3" class="card-slider" style="background-image:url(sooraj3.jpg); background-size: cover; background-repeat: no-repeat;"></label>
+            <label for="s4" id="slide4" class="card-slider" style="background-image:url(sooraj4.jpg); background-size: cover; background-repeat: no-repeat;"></label>
+            <label for="s5" id="slide5" class="card-slider" style="background-image:url(sooraj5.jpg); background-size: cover; background-repeat: no-repeat;"></label>
+        </div>
+        <div class="proin">
+            <!-- <div >
+            <img src="SOORAJ-COMMING-SOON.jpg" alt="pro" class="proimg">
+            </div> -->
+            
+            <div class="timecont">
+                <div class="container">
+                    <div class="btn"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfATaHcnbm_cpkpr989TbpGeU6IZyoy1ph_1Ky_9lV_QRn5Ag/viewform?usp=sf_link" target="_blank">Get Your Tickets</a></div>
+                    </div>
+                    <div class="timer">
+                    <div>
+                        <p id="days">00</p>
+                        <span>Days</span>
+                    </div>
+                    <div>
+                        <p id="hours">00</p>
+                        <span>Hours</span>
+                    </div>
+                    <div>
+                        <p id="minutes">00</p>
+                        <span>Minutes</span>
+                    </div>
+                    <div>
+                        <p id="seconds">00</p>
+                        <span>Seconds</span>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div id="slider">
+          <input class="card-slider" type="radio" name="slider" id="s1" checked>
+          <input class="card-slider" type="radio" name="slider" id="s2">
+          <input class="card-slider" type="radio" name="slider" id="s3" >
+          <input class="card-slider" type="radio" name="slider" id="s4">
+          <input class="card-slider"type="radio" name="slider" id="s5">
+          <label for="s1" id="slide1" class="card-slider" style="background-image:url(sooraj1.jpg); background-size: contain; background-repeat: no-repeat;"></label>
+          <label for="s2" id="slide2" class="card-slider" style="background-image:url(sooraj2.jpg); background-size: cover; background-repeat: no-repeat;"></label>
+          <label for="s3" id="slide3" class="card-slider" style="background-image:url(sooraj3.jpg); background-size: cover; background-repeat: no-repeat;"></label>
+          <label for="s4" id="slide4" class="card-slider" style="background-image:url(sooraj4.jpg); background-size: cover; background-repeat: no-repeat;"></label>
+          <label for="s5" id="slide5" class="card-slider" style="background-image:url(sooraj5.jpg); background-size: cover; background-repeat: no-repeat;"></label>
+      </div>
+      <div class="proin">
+          <!-- <div >
+          <img src="SOORAJ-COMMING-SOON.jpg" alt="pro" class="proimg">
+          </div> -->
+          
+          <div class="timecont">
+              <div class="container">
+                  <div class="btn"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfATaHcnbm_cpkpr989TbpGeU6IZyoy1ph_1Ky_9lV_QRn5Ag/viewform?usp=sf_link" target="_blank">Get Your Tickets</a></div>
+                  </div>
+                  <div class="timer">
+                  <div>
+                      <p id="days">00</p>
+                      <span>Days</span>
+                  </div>
+                  <div>
+                      <p id="hours">00</p>
+                      <span>Hours</span>
+                  </div>
+                  <div>
+                      <p id="minutes">00</p>
+                      <span>Minutes</span>
+                  </div>
+                  <div>
+                      <p id="seconds">00</p>
+                      <span>Seconds</span>
+                  </div>
+              </div>
+          </div>
+      
+      </div>
+        
+    </div>
+    
+</section>  
+<section>
+    <div class="event" id="event">
+        <center><h1 id="eva">MAIN EVENTS</h1></center>
+        <!-- <img src="cslogo.png" alt="cslogo" class="cslogo deptlogo">
+        <img src="mechlogo.png" alt="mechlogo" class="mechlogo deptlogo">
+        <img src="eclogo.png" alt="eclogo" class="eclogo deptlogo">
+        <img src="eeelogo.png" alt="eeelogo" class="eeelogo deptlogo"> -->
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <div class="branch">
+            <div class="cs">
+                <h1>CSE</h1>
+                <div>
+                    <div class="container2">
+                        <div class="panel" style="background-image: url('https://bit.ly/3jLZ6aH')">
+                            <a href="">Register Now</a>
+                        </div>
+                
+                        <div class="panel" style="background-image: url('https://bit.ly/3CtZIZ3')">
+                            <a href="">Register Now</a>
+                        </div>
+                        <div class="panel" style="background-image: url('https://bit.ly/2WPDaCT')">
+                            <a href="">Register Now</a>
+                        </div>
+                    </div>
+                    <h2 class="reg">CLICK IMAGE <br> TO REGISTER...</h2>
+                    <p class="pslide1">
+                        EVENT NOT ENTERED YET....
+                    </p>
+                </div>
+            </div>
+            <div class="mech">
+                <h1>MECH</h1>
+                <div>
+                    <p class="pslide2">
+                        EVENT NOT ENTERED YET....
+                    </p>
+                    <h2 class="reg">CLICK IMAGE <br> TO REGISTER...</h2>
+                <div class="container3">
+                    <div class="panel" style="background-image: url('https://bit.ly/3jLZ6aH')">
+                        <a href="">Register Now</a>
+                    </div>
+            
+                    <div class="panel" style="background-image: url('https://bit.ly/3CtZIZ3')">
+                        <a href="">Register Now</a>
+                    </div>
+                    <div class="panel" style="background-image: url('https://bit.ly/2WPDaCT')">
+                        <a href="">Register Now</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="ec">
+                <h1>EC</h1>
+                <div>
+                    <div class="container4">
+                        <div class="panel" style="background-image: url('https://bit.ly/3jLZ6aH')">
+                            <a href="">Register Now</a>
+                        </div>
+                
+                        <div class="panel" style="background-image: url('https://bit.ly/3CtZIZ3')">
+                            <a href="">Register Now</a>
+                        </div>
+                        <div class="panel" style="background-image: url('https://bit.ly/2WPDaCT')">
+                            <a href="">Register Now</a>
+                        </div>
+                    </div>
+                    <h2 class="reg">CLICK IMAGE <br> TO REGISTER...</h2>
+                    <p class="pslide1">
+                        EVENT NOT ENTERED YET....
+                    </p>
+                </div>
+            </div>
+            <div class="eee">
+                <h1>EEE</h1>
+                <div>
+                    <p class="pslide2">Hey techies!!!
+                        <br>
+                    Are you looking for a chance to show off your amazing skills and mind-bending ideas, but not sure what to do? Well, worry no more! Vidyuth 6.0 is calling all tech wizards to showcase their talent and technological passion! Make sure to register ASAP and submit your project abstract.
+                    <br>
+                    This application call is open to all undergraduate and postgraduate students studying in the Electrical and Electronics domains.
+                    <br>
+                    Reg Fees: 400/- (per team)
+                    <!-- Register Here: https://forms.gle/6KBgKgX5JGP73Ge46 -->
+                    <br>
+                    For any queries,
+                    Gouri Sudarsan :8129029211 
+                    Akshay Sajith     :9633945277
+                    <br>
+                    Good luck and have a blast at VIDYUTH 6.0
+                    </p>
+                    <h2 class="reg">CLICK IMAGE <br> TO REGISTER...</h2>
+                <div class="container5">
+                    <div class="panel" style="background-image: url('1eee.png')">
+                        <a href="https://forms.gle/6KBgKgX5JGP73Ge46">Register Now</a>
+                    </div>
+            
+                    <div class="panel" style="background-image: url('2eee.png')">
+                        <a href="https://forms.gle/6KBgKgX5JGP73Ge46">Register Now</a>
+                    </div>
+                    <div class="panel" style="background-image: url('3eee.png')">
+                        <a href="https://forms.gle/6KBgKgX5JGP73Ge46">Register Now</a>
+                    </div>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="other_event">
+        <center><h1 id="other">EVENTS</h1></center>
+        <form id="search-box">
+            <input type="text" id="input-box" placeholder="search for an event..." autocomplete="off">
+            <button type="submit"><img src="search.png" alt="" class="searchimg"></button>
+        </form> 
+        <div class="result-box">
+        </div>
+    </div>
+    <div class="footer">
+        <div id="footer-content">
+            <ul>
+                <li><a href="eventlist.html">event list</a></li>
+                <!-- <li><p>.</p></li> -->
+                <li><a href="mailto:advyka2k24@gmail.com">contact Us</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/advyka.cep?igsh=MWE0bnZiYXlsc3VoZA==" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+                <a href="" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+                <a href="mailto:advyka2k24@gmail.com" target="_blank"><img src="email.png" alt="Email"></a>
+            </div>
+            <p class="may">MAY 10,11,12</p>
+        </div>
+    </div>
+    <link rel="stylesheet" href="cube.css">
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+</section>
+
+<script src="main.js"></script>
+<script>
+    // Function to show loader
+function showLoader() {
+    document.querySelector('.loadback').style.display = 'block';
+}
+
+// Function to hide loader
+function hideLoader() {
+    document.querySelector('.loadback').style.display = 'none';
+}
+
+// Show loader when the page starts loading
+showLoader();
+
+// Hide loader when all resources (including images, scripts, etc.) have finished loading
+window.addEventListener('load', function() {
+    hideLoader();
+});
+
+  </script>
+</body>
+</html>
